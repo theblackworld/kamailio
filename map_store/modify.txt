@@ -1,0 +1,26 @@
+﻿// author : xuliang
+// date   : 2018/7/2   
+// 记录每次修改变动
+
+date: 7.1   编写map基础数据结构, 添加代码部分 mod_store.c  189行: 防止roomid的hash值相同，
+            
+			if(prev == NULL){
+	           map_table->table[slot].next = room;
+	        }
+ 	        else{ 
+	           prev->next = room;
+            }
+
+date: 7.2   把之前编写的map转换成kamailio module尚未测试;
+
+
+date: 7.3   添加了 map_util.h  map_util.c,  尚未经过测试
+
+      7.3   map_mod.c     line 9    add:       #include "../../cfg/cfg_struct.h" 
+	        datatype.h    line 25   change:    struct map* next;    
+			
+	  7.4   Makeile  : change     DEFS+=-DSER_MOD_INTERFACE     DEFS+=-DKAMAILIO_MOD_INTERFACE
+	  
+	  7.4   完成全部编译部分, 尚未进行测试，有待注意的是资源的释放问题;
+	
+	  7.5  编译并且完成调试部分,module可以正常使用达到预期目的,但不知是否存在内存泄漏问题;
