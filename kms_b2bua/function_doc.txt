@@ -1,0 +1,34 @@
+1.
+  in  kms_dlg.c
+  
+    缺少部分：    鉴权部分kamailio本身没有自带;
+  
+    function :
+	  line:10     dose not exists such header in kamailio-4.3
+	  
+	  line:15     does not exists such header in kamailio-4.3
+ 
+	  line:186    void b2b_delete_legs(dlg_leg_t** legs); //  may exists problem;
+		
+	  line:460	  void destroy_b2b_htables(void);         //  may exsits problem , because it may exists memory leak; 
+	  
+	  
+	  line:1015   int b2b_send_indlg_req(b2b_dlg_t* dlg, enum b2b_entity_type et, str* b2b_key, str* method, str* ehdr, str* body, unsigned int no_cb)
+	       
+		            in line 1033:
+                       
+              	       bulid_dlg = b2b_server_bulid_dlg;	  //  where exists the function b2b_server_build_dlg; 	  
+				  
+				    in line 1075:
+				     
+                       tmb.setlocalTholder(&dlg->uac_tran); //  what is meaning of this function;					 
+					  
+      line:1191   int b2b_send_request(b2b_req_data_t* req_data);
+
+                    in line 1276:
+                        
+						b2b_send_indlg_req(dlg, et, b2b_key, &ack, &ehdr, req_data->body, req_data->no_cb);       // where the ack is   ????
+                					
+					in line 1380:  
+					    
+					    ret = b2b_send_indlg_req(dlg, et, b2b_key, &bye, &ehdr, req_data->body, req_data->no_cb);  // where is the bye; ??
