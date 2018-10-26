@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>房间详细信息</title>
+<style type="text/css">
+<!--
+.STYLE1 {}
+.STYLE2 {font-size: x-large}
+-->
+</style>
+  <script src="./js/room.js"></script>
+</head>
+
+<body>
+<table width="100%" border="0">
+  <tr>
+    <td height="55">&nbsp;</td>
+  </tr>
+  <tr>
+    <td height="55"><div align="center" class="STYLE2">房间详细信息</div></td>
+  </tr>
+  <form action="/participants" method="post"  id="test_form" >
+    <tr>
+      <td>
+        <div align="center" class="STYLE1">
+          <table width="20%" border="1">
+            <tr bordercolor="#000000">
+              <td width="50%" bgcolor="#CCCCCC"><div align="right">房间名：</div></td>
+              <td >
+                <input type='text'  readonly="true"  name="roomID" th:value="${room.getName()}" />
+              </td>
+            </tr>
+          </table>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div align="center">
+          <table width="20%" border="1">
+            <tr>
+              <td width="50%" bgcolor="#CCCCCC">
+                <div align="right" class="STYLE1">发起者：</div>
+              </td>
+              <td>
+                <input type='text'  readonly="true"  name="Presenter" th:value="${room.getPresenter()}" />
+              </td>
+            </tr>
+          </table>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div align="center">
+          <table width="20%" border="1">
+            <tr>
+              <td width="50%" bgcolor="#CCCCCC">
+                <div align="right" class="STYLE1">规 模：</div>
+              </td>
+              <td>
+                <input type='text'  readonly="true"  name="Scale" th:value="${room.getScale()}" />
+              </td>
+            </tr>
+          </table>
+        </div>
+      </td>
+    </tr>
+  </form>
+  <tr>
+    <td><div align="left">
+      <div>
+	    <div align="center">
+	      <table width="20%" border="1">
+            <tr>
+              <td bgcolor="#CCCCCC"><div align="center"><strong>与会者：</strong></div></td>
+            </tr>
+              </table>
+	      <table width="20%" border="0">
+              <tr>
+                <td>
+                  <table width="100%" border="1" th:each="participant:${room.getParticipants()}">
+                    <form action="/remove" method="post"  >
+                      <tr>
+                        <td width="80%">
+                          <div align="left">
+                            <input type='text'  readonly="true"  name="participant" th:value="${participant.getName()}" />
+                            <input type='hidden'  readonly="true"  name="roomName" th:value="${participant.getRoomName()}" />
+                          </div></td>
+                        <td width="20%"><input type="submit" style=" border:0px" name="Submit" value="删除" /></td>
+                      </tr>
+                    </form>
+                  </table>
+                </td>
+              </tr>
+          </table>
+	      </div>
+      </div>
+    </div></td>
+  </tr>
+</table>
+</body>
+</html>

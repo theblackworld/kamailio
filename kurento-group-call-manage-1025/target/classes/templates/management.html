@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>会话管理</title>
+    <script src="./js/management.js"></script>
+</head>
+
+<body>
+<table width="100%" height="569">
+  <tr>
+    <th height="117" scope="col"><form id="form1" name="form1" th:action="@{/add}" method="post">
+      <label>roomID
+        <input type="text" name="roomID" />
+&nbsp;      </label>
+        <label>Presenter
+        <input name="Presenter" type="text" size="50" />
+        </label>
+        <label>Scale
+        <input type="text" name="Scale" />
+        &nbsp;      </label>
+        <label>
+         &nbsp;
+         <input type="submit" name="Submit" value="添加" />
+        </label>
+
+    </form></th>
+  </tr>
+  <tr>
+    <th height="55" scope="col">当前会话</th>
+  </tr>
+  <tr>
+    <td height="387" align="center" valign="top"><table width="60%" border="1" align="center" cellspacing="0" bordercolor="#666666">
+
+      <tr>
+        <th width="10%" bgcolor="#F0F0F0" scope="col">&nbsp;</th>
+        <th width="20%" bgcolor="#F0F0F0" scope="col">roomID</th>
+        <th width="30%" bgcolor="#F0F0F0" scope="col">Presenter</th>
+        <th width="20%" bgcolor="#F0F0F0" scope="col">Scale</th>
+        <th width="10%" bgcolor="#F0F0F0" scope="col">&nbsp;</th>
+
+      </tr>
+      <tr th:each="rooms:${rooms}">
+	  <form action="" method="post"  >
+          <td><div align="center">
+              <input type="submit" onclick="javascript:this.form.action='/participants';" name="Submit" value="与会人员" />
+          </div></td>
+        <td align="center" valign="middle">
+            <div align="center"><input  type='text' style=" border:0px" readonly="true" width="100%" name="roomID" th:value="${rooms.key}" /></div></td>
+        <td><div align="center">
+          <input type='text' style=" border:0px" readonly="true" size="50" name="Presenter" th:value="${rooms.value.getPresenter()}" />
+        </div></td>
+          <td align="center" valign="middle"><div align="center" >
+              <input type='text' style=" border:0px" readonly="true" width="100%" name="Scale" th:value="${rooms.value.getScale()}" />
+          </div></td>
+        <td><div align="center">
+          <input type="submit" onclick="javascript:this.form.action='/delete';" name="Submit" value="删除" />
+        </div></td>
+
+		</form>
+      </tr>
+    </table></td>
+  </tr>
+</table>
+
+</body>
+</html>
